@@ -14,97 +14,48 @@ namespace Processing.OpenTk.Core.Math
             Y = y;
         }
 
-        public static PVector î => new PVector(1, 0);
+        public static PVector î => (1, 0);
 
-        public static PVector ĵ => new PVector(0, 1);
+        public static PVector ĵ => (0, 1);
 
-        public static PVector O => new PVector(0, 0);
+        public static PVector O => (0, 0);
 
-        public static PVector FromAngle(double angle)
-        {
-            return new PVector(Sin(angle), Cos(angle));
-        }
+        public static PVector FromAngle(double angle) => (Sin(angle), Cos(angle));
+        
+        public static PVector operator +(PVector a, PVector b) => a.Add(b);
+        
+        public static PVector operator -(PVector a, PVector b) =>  a.Add((-b.X, -b.Y));
+        
+        public static PVector operator *(PVector a, PVector b) => (a.X * b.X, a.Y * b.Y);
+        
+        public static PVector operator *(PVector a, double b) => a.Scale(b);
+        
+        public static PVector operator *(PVector a, int b) => a.Scale(b);        
 
-        public static PVector operator +(PVector a, PVector b)
-        {
-            return a.Add(b);
-        }
-
-        public static PVector operator -(PVector a, PVector b)
-        {
-            return a.Add(new PVector(-b.X, -b.Y));
-        }
-
-        public static PVector operator *(PVector a, double b)
-        {
-            return a.Scale(b);
-        }
-
-        public static PVector operator *(PVector a, int b)
-        {
-            return a.Scale(b);
-        }
-
-        public static PVector operator *(double a, PVector b)
-        {
-            return b.Scale(a);
-        }
-
-        public static PVector operator *(int a, PVector b)
-        {
-            return b.Scale(a);
-        }
-
-        public static PVector operator /(PVector a, double b)
-        {
-            return a.Scale(1 / b);
-        }
-
-        public PVector Add(PVector to)
-        {
-            return new PVector(X + to.X, Y + to.Y);
-        }
-
-        public PVector Scale(double scalar)
-        {
-            return new PVector(X * scalar, Y * scalar);
-        }
-
-        public double Dot(PVector by)
-        {
-            return X * by.X + Y + by.Y;
-        }
-
-        public double MagnitudeSquared()
-        {
-            return X * X + Y * Y;
-        }
-
-        public double Magnitude()
-        {
-            return Sqrt(MagnitudeSquared());
-        }
-
-        public double Angle()
-        {
-            return Atan2(Y, X);
-        }
-
-        public PVector Unit()
-        {
-            return this / Magnitude();
-        }
-
-        public PVector Rotate(double angle)
-        {
-            return FromAngle(Angle() + angle) * Magnitude();
-        }
-
-        public override string ToString()
-        {
-            return $"{{{X}, {Y}}}";
-        }
-
+        public static PVector operator *(double a, PVector b) => b.Scale(a);
+        
+        public static PVector operator *(int a, PVector b) => b.Scale(a);
+        
+        public static PVector operator /(PVector a, double b) => a.Scale(1 / b);
+        
+        public PVector Add(PVector to) => (X + to.X, Y + to.Y);
+        
+        public PVector Scale(double scalar) => (X * scalar, Y * scalar);
+        
+        public double Dot(PVector by) => X * by.X + Y * by.Y;
+        
+        public double MagnitudeSquared() => X * X + Y * Y;
+        
+        public double Magnitude() => Sqrt(MagnitudeSquared());
+        
+        public double Angle() => Atan2(Y, X);
+        
+        public PVector Unit() => this / Magnitude();
+        
+        public PVector Rotate(double angle) => FromAngle(Angle() + angle) * Magnitude();
+            
+        public override string ToString() => $"{{{X}, {Y}}}";
+        
         public static implicit operator Vector2(PVector v) => new Vector2((float)v.X, (float)v.Y);
 
         public static implicit operator PVector((double, double) v) => new PVector(v.Item1, v.Item2);
