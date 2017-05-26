@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kelson.Engine", "Kelson.Engine\Kelson.Engine.csproj", "{016A85DA-40E9-433C-84BF-6FED2B01B242}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{28157339-6136-4B17-85B0-C04044360E12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rendering", "Rendering", "{218DFA0A-F773-456C-933F-DC3D607EA4CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KUI", "KUI", "{DD4D8C0A-E2B9-44E6-BC9C-15A3BB8F5462}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Processing.OpenTk.Core", "Processing.OpenTk.Core\Processing.OpenTk.Core.csproj", "{B94C1E52-E87F-47E3-8EE8-BF5370039939}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTypeSharp.NetStandard", "TrueTypeSharp.NetStandard\TrueTypeSharp.NetStandard.csproj", "{CF08A2DF-9BF3-45A9-B2AC-FFB665099282}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Processing.OpenTk.Runner", "Processing.OpenTk.Runner\Processing.OpenTk.Runner.csproj", "{87E18DB9-6967-4E63-9C7C-1DA7A87A1648}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{016A85DA-40E9-433C-84BF-6FED2B01B242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016A85DA-40E9-433C-84BF-6FED2B01B242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016A85DA-40E9-433C-84BF-6FED2B01B242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016A85DA-40E9-433C-84BF-6FED2B01B242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94C1E52-E87F-47E3-8EE8-BF5370039939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94C1E52-E87F-47E3-8EE8-BF5370039939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94C1E52-E87F-47E3-8EE8-BF5370039939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94C1E52-E87F-47E3-8EE8-BF5370039939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF08A2DF-9BF3-45A9-B2AC-FFB665099282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF08A2DF-9BF3-45A9-B2AC-FFB665099282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF08A2DF-9BF3-45A9-B2AC-FFB665099282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF08A2DF-9BF3-45A9-B2AC-FFB665099282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E18DB9-6967-4E63-9C7C-1DA7A87A1648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E18DB9-6967-4E63-9C7C-1DA7A87A1648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E18DB9-6967-4E63-9C7C-1DA7A87A1648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E18DB9-6967-4E63-9C7C-1DA7A87A1648}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{016A85DA-40E9-433C-84BF-6FED2B01B242} = {28157339-6136-4B17-85B0-C04044360E12}
+		{B94C1E52-E87F-47E3-8EE8-BF5370039939} = {218DFA0A-F773-456C-933F-DC3D607EA4CD}
+		{CF08A2DF-9BF3-45A9-B2AC-FFB665099282} = {218DFA0A-F773-456C-933F-DC3D607EA4CD}
+		{87E18DB9-6967-4E63-9C7C-1DA7A87A1648} = {218DFA0A-F773-456C-933F-DC3D607EA4CD}
+	EndGlobalSection
+EndGlobal

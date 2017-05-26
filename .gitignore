@@ -1,0 +1,10 @@
+
+*.cache
+
+*.pdb
+
+*.dll
+
+source/**/obj/
+source/**/bin/
+source/**/v15/
