@@ -1,7 +1,6 @@
 ﻿using System;
 using Processing.OpenTk.Core;
 using OpenTK.Graphics;
-using Processing.OpenTk.Core.Math;
 
 namespace Processing.OpenTk.Runner
 {
@@ -24,8 +23,7 @@ namespace Processing.OpenTk.Runner
             c.Background(Color4.CornflowerBlue);
 
             c.Style.Fill = Color4.Crimson;
-            PVector offset = c.ToScalarCoordinate((c.Mouse.X, c.Mouse.Y));
-            offset = (offset.X, -offset.Y);
+            var offset = c.ToScalarCoordinate((c.Mouse.X, c.Mouse.Y));            
 
             c.PushMatrix()
                 .Translate(offset)

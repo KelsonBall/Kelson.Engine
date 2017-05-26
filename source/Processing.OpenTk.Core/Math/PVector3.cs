@@ -1,5 +1,4 @@
 ﻿using OpenTK;
-using System;
 using static System.Math;
 
 namespace Processing.OpenTk.Core.Math

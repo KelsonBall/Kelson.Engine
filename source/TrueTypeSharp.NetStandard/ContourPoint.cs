@@ -20,7 +20,6 @@
 */
 #endregion
 
-using System;
 
 namespace TrueTypeSharp
 {

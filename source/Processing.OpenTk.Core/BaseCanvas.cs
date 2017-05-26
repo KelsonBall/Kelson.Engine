@@ -3,7 +3,6 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
-using static System.Math;
 using Processing.OpenTk.Core.Math;
 
 namespace Processing.OpenTk.Core
@@ -23,8 +22,7 @@ namespace Processing.OpenTk.Core
             base.OnLoad(e);
 
             GL.ClearColor(Color.CornflowerBlue);
-            GL.Enable(EnableCap.DepthTest);
-            WindowState = WindowState.Fullscreen;
+            GL.Enable(EnableCap.DepthTest);            
         }
 
         protected override void OnResize(EventArgs e)
@@ -32,11 +30,7 @@ namespace Processing.OpenTk.Core
             base.OnResize(e);
 
             GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
-
-            //Matrix4 projection = Matrix4.CreatePerspectiveFieldOfView((float)PI / 4, Width / (float)Height, 1.0f, 64.0f);
-            //GL.MatrixMode(MatrixMode.Projection);
-            //GL.LoadMatrix(ref projection);
-
+            
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
         }
@@ -54,11 +48,7 @@ namespace Processing.OpenTk.Core
         {
             base.OnRenderFrame(e);
             
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            //GL.Viewport(0, 0, Width, Height);
-            GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.AlphaTest);
-            //Matrix4 modelview = Matrix4.LookAt(Vector3.Zero, Vector3.UnitZ, Vector3.UnitY);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);                                              
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();            
 
@@ -70,6 +60,6 @@ namespace Processing.OpenTk.Core
 
         public PVector ToPixelCoordinate(PVector v) => (v.X * Width / 2, v.Y * Height / 2);
 
-        public PVector ToScalarCoordinate(PVector v) => ((v.X - MidWidth) / MidWidth, (v.Y - MidHeight) / MidHeight);
+        public PVector ToScalarCoordinate(PVector v) => ((v.X - MidWidth) / MidWidth, -(v.Y - MidHeight) / MidHeight);
     }
 }

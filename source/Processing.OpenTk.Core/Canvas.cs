@@ -1,23 +1,33 @@
 ﻿using Processing.OpenTk.Core.Rendering;
 using System;
-using System.Collections.Generic;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using Processing.OpenTk.Core.Math;
 using Processing.OpenTk.Core.Textures;
 using OpenTK;
+using OpenTK.Input;
 
 namespace Processing.OpenTk.Core
 {
-    public class Canvas : BaseCanvas, IRenderer
+    public class Canvas : BaseCanvas, ICanvas
     {
-        public event Action<Canvas> Draw
+        public event Action<ICanvas> Draw
         {
             add => renderEvent += e => value.Invoke(this); 
             remove => throw new InvalidOperationException(); 
         }
 
-        public Action<Canvas> Setup { get; set; }
+        public event Action<ICanvas> Setup { add => throw new NotImplementedException(); remove => throw new NotImplementedException(); }
+
+        public event Action<KeyboardKeyEventArgs> KeyDown { add => throw new NotImplementedException(); remove => throw new NotImplementedException(); }
+
+        public event Action<KeyboardKeyEventArgs> KeyUp { add => throw new NotImplementedException(); remove => throw new NotImplementedException(); }
+
+        public event Action<MouseButtonEventArgs> MouseButtonDown { add => throw new NotImplementedException(); remove => throw new NotImplementedException(); }
+
+        public event Action<MouseButtonEventArgs> MouseButtonUp { add => throw new NotImplementedException(); remove => throw new NotImplementedException(); }
+
+        public event Action<MouseMoveEventArgs> MouseMoved { add => throw new NotImplementedException(); remove => throw new NotImplementedException(); }
 
         public FrameEventArgs Frame;
 
@@ -29,24 +39,25 @@ namespace Processing.OpenTk.Core
         public Canvas(int sizex, int sizey, string title) : base(sizex, sizey)
         {
             Title = title;
-            base.renderEvent -= e => Frame = e;            
+            base.renderEvent -= e => Frame = e;    
+            
         }
 
         public Style Style { get; } = new Style();
 
-        public IRenderer Background(Color4 color)
+        public ICanvas Background(Color4 color)
         {
             GL.ClearColor(color);
             return this;
         }
 
-        public IRenderer Background(float r, float g, float b, float a = 1f)
+        public ICanvas Background(float r, float g, float b, float a = 1f)
         {
             GL.ClearColor(r, g, b, a);
             return this;
         }
 
-        public IRenderer Triangle(PVector a, PVector b, PVector c)
+        public ICanvas Triangle(PVector a, PVector b, PVector c)
         {
             GL.Begin(PrimitiveType.Triangles);
             GL.Color4(Style.Fill);
@@ -59,7 +70,7 @@ namespace Processing.OpenTk.Core
             return this;
         }
 
-        public IRenderer Triangle(PVector3 a, PVector3 b, PVector3 c)
+        public ICanvas Triangle(PVector3 a, PVector3 b, PVector3 c)
         {
             GL.Begin(PrimitiveType.Triangles);
             GL.Color4(Style.Fill);
@@ -72,21 +83,21 @@ namespace Processing.OpenTk.Core
             return this;
         }
 
-        public IRenderer Rectangle(PVector position, PVector size)
+        public ICanvas Rectangle(PVector position, PVector size)
         {
             GL.Begin(PrimitiveType.Quads);
             GL.Color4(Style.Fill);
 
             GL.Vertex2(position.X, position.Y);
             GL.Vertex2(position.X + size.X, position.Y);
-            GL.Vertex2(position.X + size.X, position.Y + size.Y);
-            GL.Vertex2(position.X, position.Y + size.Y);
+            GL.Vertex2(position.X + size.X, position.Y - size.Y);
+            GL.Vertex2(position.X, position.Y - size.Y);
 
             GL.End();
             return this;
         }
 
-        public IRenderer Box(PVector3 position, PVector3 size)
+        public ICanvas Box(PVector3 position, PVector3 size)
         {
             GL.Begin(PrimitiveType.Quads);
             GL.Color4(Style.Fill);
@@ -125,128 +136,128 @@ namespace Processing.OpenTk.Core
             return this;
         }
 
-        public IRenderer Quad(PVector a, PVector b, PVector c, PVector d)
+        public ICanvas Quad(PVector a, PVector b, PVector c, PVector d)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Quad(PVector3 a, PVector3 b, PVector3 c, PVector3 d)
+        public ICanvas Quad(PVector3 a, PVector3 b, PVector3 c, PVector3 d)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Ellipse(PVector position, PVector size)
+        public ICanvas Ellipse(PVector position, PVector size)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Ellipsoid(PVector3 position, PVector3 size)
+        public ICanvas Ellipsoid(PVector3 position, PVector3 size)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Line(PVector a, PVector b)
+        public ICanvas Line(PVector a, PVector b)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Arc(PVector position, PVector size, float startAngle, float sweepAngle)
+        public ICanvas Arc(PVector position, PVector size, float startAngle, float sweepAngle)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Line(PVector3 a, PVector3 b)
+        public ICanvas Line(PVector3 a, PVector3 b)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Image(Texture2d image, PVector position)
+        public ICanvas Image(Texture2d image, PVector position)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Image(Texture2d image, PVector3 position, PVector3 normal)
+        public ICanvas Image(Texture2d image, PVector3 position, PVector3 normal)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Text(string text, PVector position)
+        public ICanvas Text(string text, PVector position)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Text(string text, PVector3 position, PVector3 normal)
+        public ICanvas Text(string text, PVector3 position, PVector3 normal)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Shape(PVector position, params PVector[] points)
+        public ICanvas Shape(PVector position, params PVector[] points)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Shape(PVector3 position, params PVector3[] points)
+        public ICanvas Shape(PVector3 position, params PVector3[] points)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Model(PVector3 position, Model model, TextureMap map)
+        public ICanvas Model(PVector3 position, Model model, TextureMap map)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Model(PVector3 position, Model model, Color4 color)
+        public ICanvas Model(PVector3 position, Model model, Color4 color)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Model(PVector3 position, Model model, Color4[] vertexColors)
+        public ICanvas Model(PVector3 position, Model model, Color4[] vertexColors)
         {
             throw new NotImplementedException();
         }
 
-        public IRenderer Translate(PVector translation)
+        public ICanvas Translate(PVector translation)
         {
             GL.Translate(translation.X, translation.Y, 0);
             return this;
         }
 
-        public IRenderer Translate(PVector3 translation)
+        public ICanvas Translate(PVector3 translation)
         {
             GL.Translate(translation);
             return this;
         }
 
-        public IRenderer Rotate(float angle)
+        public ICanvas Rotate(float angle)
         {
             GL.Rotate(angle, Vector3.UnitZ);
             return this;
         }
 
-        public IRenderer RotateX(float angle)
+        public ICanvas RotateX(float angle)
         {
             GL.Rotate(angle, Vector3.UnitX);
             return this;
         }
 
-        public IRenderer RotateZ(float angle)
+        public ICanvas RotateZ(float angle)
         {
             return Rotate(angle);
         }
 
-        public IRenderer RotateY(float angle)
+        public ICanvas RotateY(float angle)
         {
             GL.Rotate(angle, Vector3.UnitY);
             return this;
         }
 
-        public IRenderer PushMatrix()
+        public ICanvas PushMatrix()
         {
             GL.PushMatrix();
             return this;
         }
 
-        public IRenderer PopMatrix()
+        public ICanvas PopMatrix()
         {
             GL.PopMatrix();
             return this;
