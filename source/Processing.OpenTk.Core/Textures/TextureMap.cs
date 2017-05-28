@@ -1,4 +1,4 @@
-﻿using Processing.OpenTk.Core.Math;
+﻿using Processing.OpenTk.Core.Vectors;
 
 namespace Processing.OpenTk.Core.Textures
 {

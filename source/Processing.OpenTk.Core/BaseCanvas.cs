@@ -3,7 +3,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
-using Processing.OpenTk.Core.Math;
+using Processing.OpenTk.Core.Vectors;
 
 namespace Processing.OpenTk.Core
 {
@@ -12,17 +12,20 @@ namespace Processing.OpenTk.Core
         public int MidWidth => Width / 2;
         public int MidHeight => Height / 2;
 
-        public BaseCanvas(int sizex, int sizey) : base(sizex, sizey, new GraphicsMode(32, 0, 0, 16))
-        {
-            VSync = VSyncMode.On;
+        public BaseCanvas(int sizex, int sizey) : base(sizex, sizey, GraphicsMode.Default)
+        {            
         }
 
+        protected Action<EventArgs> loadEvent;
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             GL.ClearColor(Color.CornflowerBlue);
-            GL.Enable(EnableCap.DepthTest);            
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.AlphaTest);
+
+            loadEvent?.Invoke(e);
         }
 
         protected override void OnResize(EventArgs e)
@@ -31,8 +34,8 @@ namespace Processing.OpenTk.Core
 
             GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
             
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
+            //GL.MatrixMode(MatrixMode.Projection);
+            //GL.LoadIdentity();
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
@@ -49,8 +52,9 @@ namespace Processing.OpenTk.Core
             base.OnRenderFrame(e);
             
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);                                              
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();            
+
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.AlphaTest);
 
             renderEvent?.Invoke(e);
 

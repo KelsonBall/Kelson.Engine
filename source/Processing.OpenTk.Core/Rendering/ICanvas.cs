@@ -1,8 +1,10 @@
 ﻿using OpenTK.Graphics;
 using OpenTK.Input;
-using Processing.OpenTk.Core.Math;
+using Processing.OpenTk.Core.Vectors;
 using Processing.OpenTk.Core.Textures;
 using System;
+using TrueTypeSharp;
+using System.Collections.Generic;
 
 namespace Processing.OpenTk.Core.Rendering
 {
@@ -19,13 +21,13 @@ namespace Processing.OpenTk.Core.Rendering
         Style Style { get; }
 
         ICanvas Background(Color4 color);
-        ICanvas Background(float r, float g, float b, float a);
+        ICanvas Background(double r, double g, double b, double a);
 
         ICanvas Triangle(PVector a, PVector b, PVector c);
         ICanvas Triangle(PVector3 a, PVector3 b, PVector3 c);
 
         ICanvas Rectangle(PVector position, PVector size);
-        ICanvas Box(PVector3 position, PVector3 size);
+        ICanvas Box(PVector3 position, double size);
 
         ICanvas Quad(PVector a, PVector b, PVector c, PVector d);
         ICanvas Quad(PVector3 a, PVector3 b, PVector3 c, PVector3 d);
@@ -34,7 +36,7 @@ namespace Processing.OpenTk.Core.Rendering
         ICanvas Ellipsoid(PVector3 position, PVector3 size);
 
         ICanvas Line(PVector a, PVector b);
-        ICanvas Arc(PVector position, PVector size, float startAngle, float sweepAngle);
+        ICanvas Arc(PVector position, PVector size, double startAngle, double sweepAngle);
         ICanvas Line(PVector3 a, PVector3 b);
 
         ICanvas Image(Texture2d image, PVector position);
@@ -46,19 +48,48 @@ namespace Processing.OpenTk.Core.Rendering
         ICanvas Shape(PVector position, params PVector[] points);
         ICanvas Shape(PVector3 position, params PVector3[] points);
 
-        ICanvas Model(PVector3 position, Model model, TextureMap map);
-        ICanvas Model(PVector3 position, Model model, Color4 color);
-        ICanvas Model(PVector3 position, Model model, Color4[] vertexColors);
+        ICanvas Model(Model model, TextureMap map);
+        ICanvas Model(Model model);
+        ICanvas Model(Model model, Color4[] vertexColors);        
+
+        ICanvas PushMatrix();
+        ICanvas PopMatrix();
 
         ICanvas Translate(PVector translation);
         ICanvas Translate(PVector3 translation);
 
-        ICanvas Rotate(float angle);
-        ICanvas RotateX(float angle);
-        ICanvas RotateY(float angle);
-        ICanvas RotateZ(float angle);
+        ICanvas Rotate(double angle);
+        ICanvas Rotate(PVector3 angles);
+        ICanvas RotateX(double angle);
+        ICanvas RotateY(double angle);
+        ICanvas RotateZ(double angle);
 
-        ICanvas PushMatrix();
-        ICanvas PopMatrix();
+        ICanvas Scale(double scale);
+        ICanvas Scale(PVector3 scale);
+
+        ICanvas Ortho();
+        ICanvas Perspective();
+        ICanvas LookAt(PVector3 from, PVector3 to, PVector3 up);
+
+        ICanvas Font(Font font);
+        ICanvas FontSize(double size);
+        ICanvas Fill(Color4 fill);
+        ICanvas Stroke(Color4 stroke);
+        ICanvas StrokeWeight(double strokeWeight);
+
+        ICanvas Title(string title);
+
+        int MouseX { get; }
+        int MouseY { get; }
+
+        int Width { get; }
+        int MidWidth { get; }
+
+        int Height { get; }
+        int MidHeight { get; }
+
+        ICanvas IfKey(Key k, Action action);
+        ICanvas IfButton(MouseButton b, Action action);
+        ICanvas ForEachIn<T>(IEnumerable<T> collection, Action<T> action);
     }
 }

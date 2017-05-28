@@ -1,7 +1,7 @@
 ﻿using OpenTK;
 using static System.Math;
 
-namespace Processing.OpenTk.Core.Math
+namespace Processing.OpenTk.Core.Vectors
 {
     public struct PVector3
     {
