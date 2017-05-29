@@ -9,6 +9,8 @@ namespace Processing.OpenTk.Core
 {
     public class BaseCanvas : GameWindow
     {
+        protected ulong FrameCount;
+
         public int MidWidth => Width / 2;
         public int MidHeight => Height / 2;
 
@@ -20,7 +22,7 @@ namespace Processing.OpenTk.Core
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
+            
             GL.ClearColor(Color.CornflowerBlue);
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.AlphaTest);
@@ -50,7 +52,8 @@ namespace Processing.OpenTk.Core
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
-            
+            FrameCount++;
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);                                              
 
             GL.Enable(EnableCap.DepthTest);

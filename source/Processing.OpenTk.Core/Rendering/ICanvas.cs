@@ -91,5 +91,8 @@ namespace Processing.OpenTk.Core.Rendering
         ICanvas IfKey(Key k, Action action);
         ICanvas IfButton(MouseButton b, Action action);
         ICanvas ForEachIn<T>(IEnumerable<T> collection, Action<T> action);
+
+        double FrameTimeScalar { get; }
+        ulong FrameCount { get; }
     }
 }

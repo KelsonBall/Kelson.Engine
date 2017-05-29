@@ -12,9 +12,16 @@ namespace Processing.OpenTk.Core
 {
     public class Canvas : BaseCanvas, ICanvas
     {
+        public double FrameTimeScalar { get; private set; }
+        public new ulong FrameCount { get => base.FrameCount; }
+
         public event Action<ICanvas> Draw
         {
-            add => renderEvent += e => value.Invoke(this); 
+            add => renderEvent += e =>
+            {
+                FrameTimeScalar = e.Time / RenderPeriod;
+                value.Invoke(this);
+            };
             remove => throw new InvalidOperationException(); 
         }
 
